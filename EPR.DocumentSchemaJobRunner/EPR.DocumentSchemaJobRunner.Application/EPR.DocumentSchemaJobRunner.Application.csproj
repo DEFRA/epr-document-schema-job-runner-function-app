@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>EPR.DocumentSchemaJobRunner.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EPR.DocumentSchemaJobRunner.Data\EPR.DocumentSchemaJobRunner.Data.csproj" />
+    </ItemGroup>
+
+</Project>

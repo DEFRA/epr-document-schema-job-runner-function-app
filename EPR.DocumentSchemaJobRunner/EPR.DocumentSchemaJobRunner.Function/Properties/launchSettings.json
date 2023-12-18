@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "EPR.DocumentSchemaJobRunner.Function": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7140",
+      "launchBrowser": false
+    }
+  }
+}

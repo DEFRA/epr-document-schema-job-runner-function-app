@@ -83,7 +83,7 @@ public class ComplianceSchemeIdJobTests
         Expression<Func<ComplianceSchemeIdJobOutput, bool>> jobOutputExpectation =
             x => x.WasSuccessful
                  && x.JobType == JobType.ComplianceSchemeId
-                 && !x.Errors.Any()
+                 && x.Errors.Count == 0
                  && x.Results.SequenceEqual(expectedJobResults, new ComplianceSchemeIdJobResultComparer());
 
         _loggerMock.VerifyLog(x => x.LogInformation("Starting ComplianceSchemeIdJob"));
@@ -116,8 +116,8 @@ public class ComplianceSchemeIdJobTests
         Expression<Func<ComplianceSchemeIdJobOutput, bool>> jobOutputExpectation =
             x => x.WasSuccessful
                  && x.JobType == JobType.ComplianceSchemeId
-                 && !x.Errors.Any()
-                 && !x.Results.Any();
+                 && x.Errors.Count == 0
+                 && x.Results.Count == 0;
 
         _loggerMock.VerifyLog(x => x.LogInformation("Starting ComplianceSchemeIdJob"));
         _submissionsDbContext.Verify(x => x.SetModified(It.IsAny<Submission>()), Times.Never);
@@ -148,8 +148,8 @@ public class ComplianceSchemeIdJobTests
         Expression<Func<ComplianceSchemeIdJobOutput, bool>> jobOutputExpectation =
             x => x.WasSuccessful
                  && x.JobType == JobType.ComplianceSchemeId
-                 && !x.Errors.Any()
-                 && !x.Results.Any();
+                 && x.Errors.Count == 0
+                 && x.Results.Count == 0;
 
         _loggerMock.VerifyLog(x => x.LogInformation("Starting ComplianceSchemeIdJob"));
         _submissionsDbContext.Verify(x => x.SetModified(It.IsAny<Submission>()), Times.Never);
@@ -180,8 +180,8 @@ public class ComplianceSchemeIdJobTests
         Expression<Func<ComplianceSchemeIdJobOutput, bool>> jobOutputExpectation =
             x => x.WasSuccessful
                  && x.JobType == JobType.ComplianceSchemeId
-                 && !x.Errors.Any()
-                 && !x.Results.Any();
+                 && x.Errors.Count == 0
+                 && x.Results.Count == 0;
 
         _loggerMock.VerifyLog(x => x.LogInformation("Starting ComplianceSchemeIdJob"));
         _submissionsDbContext.Verify(x => x.SetModified(It.IsAny<Submission>()), Times.Never);
@@ -221,7 +221,7 @@ public class ComplianceSchemeIdJobTests
                  && x.JobType == JobType.ComplianceSchemeId
                  && x.Errors.Count == 1
                  && x.Errors.Contains(exceptionMessage)
-                 && !x.Results.Any();
+                 && x.Results.Count == 0;
 
         _loggerMock.VerifyLog(x => x.LogInformation("Starting ComplianceSchemeIdJob"));
         _submissionsDbContext.Verify(x => x.JobOutputs.AddAsync(It.Is(jobOutputExpectation), CancellationToken.None), Times.Once);

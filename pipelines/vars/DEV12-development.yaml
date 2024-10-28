@@ -3,4 +3,4 @@ variables:
   docker.imageName: 'documentschemajobrunner'
   acr.azureContainerRegistryName: 'devrwdinfac1401'
   acr.repositoryName: 'documentschemajobrunnerrepository'
-  serviceName: 'devrwdwebfac406'
+  serviceName: 'DEVRWDWEBFAC406'

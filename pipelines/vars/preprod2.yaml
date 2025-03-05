@@ -1,0 +1,6 @@
+variables:
+  azureSubscription: 'AZR-RWD-PRE2'
+  docker.imageName: 'documentschemajobrunner'
+  acr.azureContainerRegistryName: 'prerwdinfac2401'
+  acr.repositoryName: 'documentschemajobrunnerrepository'
+  serviceName: 'PRERWDWEBFA2406'

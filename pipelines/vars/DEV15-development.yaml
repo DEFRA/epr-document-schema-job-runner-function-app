@@ -1,0 +1,6 @@
+variables:
+  azureSubscription: 'AZD-RWD-DEV15'
+  docker.imageName: 'documentschemajobrunner'
+  acr.azureContainerRegistryName: 'devrwdinfacf401'
+  acr.repositoryName: 'documentschemajobrunnerrepository'
+  serviceName: 'DEVRWDWEBFAF406'

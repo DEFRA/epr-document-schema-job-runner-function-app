@@ -22,7 +22,7 @@ variables:
     value: epr-document-schema-job-runner-function-app
   - name: runNugetTasks
     value: false
- - name: runTests
+  - name: runTests
     value: true
   - name: dotnetVersion
     value: dotnetVersion8

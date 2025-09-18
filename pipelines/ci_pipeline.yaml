@@ -6,6 +6,16 @@ trigger:
     include:
       - 'EPR.DocumentSchemaJobRunner/*'
 
+parameters:
+
+  - name: sonarqubeInstance
+    displayName: 'Select SonarQube version'
+    type: string
+    default: 'SonarQube'
+    values:
+    - 'SonarQube'
+    # - 'SonarQubeLatest'
+
 pool: DEFRA-COMMON-ubuntu2004-SSV3
 
 variables:
@@ -51,4 +61,5 @@ extends:
     runNugetTasks: ${{ variables.runNugetTasks }}
     serviceName: $(serviceName)
     dotnetVersion: ${{ variables.dotnetVersion }}
+    sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
     

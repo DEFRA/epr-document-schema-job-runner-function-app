@@ -7,12 +7,10 @@ using Microsoft.Extensions.Logging;
 public class TimerTrigger
 {
     private readonly IEnumerable<IDocumentSchemaJob> _documentSchemaJobs;
-    private readonly ILogger<TimerTrigger> _logger;
 
-    public TimerTrigger(IEnumerable<IDocumentSchemaJob> documentSchemaJobs, ILogger<TimerTrigger> logger)
+    public TimerTrigger(IEnumerable<IDocumentSchemaJob> documentSchemaJobs)
     {
         _documentSchemaJobs = documentSchemaJobs;
-        _logger = logger;
     }
 
     [Function("TimerTrigger")]

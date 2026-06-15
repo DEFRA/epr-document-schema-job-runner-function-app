@@ -11,7 +11,6 @@ public class TimerTriggerTests
 {
     private Mock<IDocumentSchemaJob> _schemaJobOneMock;
     private Mock<IDocumentSchemaJob> _schemaJobTwoMock;
-    private Mock<ILogger<TimerTrigger>> _loggerMock;
     private TimerTrigger _systemUnderTest;
 
     [TestInitialize]
@@ -19,10 +18,8 @@ public class TimerTriggerTests
     {
         _schemaJobOneMock = new Mock<IDocumentSchemaJob>();
         _schemaJobTwoMock = new Mock<IDocumentSchemaJob>();
-        _loggerMock = new Mock<ILogger<TimerTrigger>>();
         _systemUnderTest = new TimerTrigger(
-            new List<IDocumentSchemaJob> { _schemaJobOneMock.Object, _schemaJobTwoMock.Object },
-            _loggerMock.Object);
+            new List<IDocumentSchemaJob> { _schemaJobOneMock.Object, _schemaJobTwoMock.Object });
     }
 
     [TestMethod]

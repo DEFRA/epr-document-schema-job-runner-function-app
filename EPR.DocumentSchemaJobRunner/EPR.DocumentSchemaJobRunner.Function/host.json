@@ -11,5 +11,10 @@
             "EPR.DocumentSchemaJobRunner": "Debug",
             "default": "Warning"
         }
+    },
+    "extensions": {
+        "timers": {
+            "useMonitor": true
+        }
     }
 }

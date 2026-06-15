@@ -1,6 +1,5 @@
 # Use the SDK image to build your application
-# FROM defradigital/dotnetcore-development:dotnet8.0 AS installer-env
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS installer-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS installer-env
 USER root
 
 # Copy your application source code
@@ -13,9 +12,8 @@ COPY Directory.Build.props ./
 # Build the application
 RUN dotnet publish EPR.DocumentSchemaJobRunner.Function/*.csproj --output /home/site/wwwroot
 
-# Use the Azure Functions image as the final image
-# FROM defradigital/dotnetcore:dotnet8.0
-FROM mcr.microsoft.com/azure-functions/dotnet:4-dotnet8
+# Use the Azure Functions isolated image as the final image
+FROM mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated10.0
 
 # Create a non-root user and set permissions
 RUN groupadd -r dotnet && \

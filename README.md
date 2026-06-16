@@ -69,11 +69,6 @@ The structure of the app-settings can be found in the repository. Example config
 
 See [ADR-059: CosmosDB Schema Migrations](https://eaflood.atlassian.net/wiki/spaces/MWR/pages/4521427100/ADR-059+CosmosDB+Schema+Migrations)
 
-
-### Monitoring and Health Check
-
-Enable Health Check in the Azure portal and set the URL path to `TimerTrigger`
-
 ## Directory Structure
 
 ### Source files

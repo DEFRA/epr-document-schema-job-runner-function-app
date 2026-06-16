@@ -1,7 +1,7 @@
 ﻿namespace EPR.DocumentSchemaJobRunner.Function;
 
 using Application.Jobs.Interfaces;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
 public class TimerTrigger
@@ -13,8 +13,8 @@ public class TimerTrigger
         _documentSchemaJobs = documentSchemaJobs;
     }
 
-    [FunctionName("TimerTrigger")]
-    public async Task RunAsync([TimerTrigger("%ScheduleExpression%", RunOnStartup = true)] TimerInfo timerInfo, ILogger log)
+    [Function("TimerTrigger")]
+    public async Task RunAsync([TimerTrigger("%ScheduleExpression%", RunOnStartup = true)] TimerInfo timerInfo)
     {
         foreach (var documentSchemaJob in _documentSchemaJobs)
         {

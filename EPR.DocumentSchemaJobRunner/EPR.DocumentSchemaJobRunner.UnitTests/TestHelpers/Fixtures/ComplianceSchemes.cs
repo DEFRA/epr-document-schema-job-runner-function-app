@@ -1,6 +1,6 @@
 ﻿namespace EPR.DocumentSchemaJobRunner.UnitTests.TestHelpers.Fixtures;
 
-using EPR.DocumentSchemaJobRunner.Data.Entities;
+using Data.Entities;
 
 public abstract class ComplianceSchemes : TestDataBase
 {

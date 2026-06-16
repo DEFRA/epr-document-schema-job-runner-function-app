@@ -1,6 +1,6 @@
 ﻿namespace EPR.DocumentSchemaJobRunner.UnitTests.TestHelpers.EqualityComparers;
 
-using EPR.DocumentSchemaJobRunner.Data.Models;
+using Data.Models;
 
 public class ComplianceSchemeIdJobResultComparer : IEqualityComparer<ComplianceSchemeIdJobResult>
 {

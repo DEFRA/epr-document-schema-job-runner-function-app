@@ -2,6 +2,7 @@
 
 using DocumentSchemaJobRunner.Application.Jobs.Interfaces;
 using DocumentSchemaJobRunner.Function;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -17,14 +18,15 @@ public class TimerTriggerTests
     {
         _schemaJobOneMock = new Mock<IDocumentSchemaJob>();
         _schemaJobTwoMock = new Mock<IDocumentSchemaJob>();
-        _systemUnderTest = new TimerTrigger(new List<IDocumentSchemaJob> { _schemaJobOneMock.Object, _schemaJobTwoMock.Object });
+        _systemUnderTest = new TimerTrigger(
+            new List<IDocumentSchemaJob> { _schemaJobOneMock.Object, _schemaJobTwoMock.Object });
     }
 
     [TestMethod]
     public async Task RunAsync_CallsSchemaJobs()
     {
         // Arrange / Act
-        await _systemUnderTest.RunAsync(null, null);
+        await _systemUnderTest.RunAsync(null);
 
         // Assert
         _schemaJobOneMock.Verify(x => x.RunAsync(), Times.Once);

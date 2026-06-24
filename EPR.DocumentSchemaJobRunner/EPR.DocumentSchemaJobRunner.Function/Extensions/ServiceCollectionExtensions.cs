@@ -43,9 +43,15 @@ public static class ServiceCollectionExtensions
     private static void RegisterCosmosDatabase(IServiceCollection services, IServiceProvider serviceProvider)
     {
         var databaseOptions = serviceProvider.GetRequiredService<IOptions<SubmissionsDatabaseOptions>>().Value;
-        var useAccountKey = !string.IsNullOrWhiteSpace(databaseOptions.AccountKey);
 
-        if (useAccountKey)
+        // Created once and reused so EF Core's internal service provider cache stays stable:
+        // a fresh TokenCredential / factory delegate per DbContext instantiation changes the
+        // options fingerprint and trips ManyServiceProvidersCreatedWarning after 20 contexts.
+        var credential = string.IsNullOrWhiteSpace(databaseOptions.AccountKey)
+            ? new DefaultAzureCredential()
+            : null;
+
+        if (credential is null)
         {
             services.AddDbContext<SubmissionsDbContext>(options => options.UseCosmos(
                 databaseOptions.ConnectionString,
@@ -55,11 +61,6 @@ public static class ServiceCollectionExtensions
         }
         else
         {
-            // Created once and reused so EF Core's internal service provider cache stays stable:
-            // a fresh TokenCredential / factory delegate per DbContext instantiation changes the
-            // options fingerprint and trips ManyServiceProvidersCreatedWarning after 20 contexts.
-            var credential = new DefaultAzureCredential();
-
             services.AddDbContext<SubmissionsDbContext>(options => options.UseCosmos(
                 databaseOptions.ConnectionString,
                 credential,

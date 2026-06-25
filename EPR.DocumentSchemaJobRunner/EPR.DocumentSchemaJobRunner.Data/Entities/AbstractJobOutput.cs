@@ -10,7 +10,7 @@ public abstract class AbstractJobOutput
 
     public DateTime EndedAt { get; set; }
 
-    public virtual JobType JobType { get; }
+    public JobType JobType { get; set; }
 
     public bool WasSuccessful { get; set; }
 

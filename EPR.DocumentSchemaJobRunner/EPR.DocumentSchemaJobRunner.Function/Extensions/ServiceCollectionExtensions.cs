@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Application.Jobs;
 using Application.Jobs.Interfaces;
+using Azure.Identity;
 using Data.DbContexts;
 using Data.Options;
 using Microsoft.Azure.Cosmos;
@@ -42,10 +43,29 @@ public static class ServiceCollectionExtensions
     private static void RegisterCosmosDatabase(IServiceCollection services, IServiceProvider serviceProvider)
     {
         var databaseOptions = serviceProvider.GetRequiredService<IOptions<SubmissionsDatabaseOptions>>().Value;
-        services.AddDbContext<SubmissionsDbContext>(options => options.UseCosmos(
-            databaseOptions.ConnectionString,
-            databaseOptions.AccountKey,
-            databaseOptions.Name,
-            cosmosOptions => cosmosOptions.ConnectionMode(ConnectionMode.Gateway)));
+
+        // Created once and reused so EF Core's internal service provider cache stays stable:
+        // a fresh TokenCredential / factory delegate per DbContext instantiation changes the
+        // options fingerprint and trips ManyServiceProvidersCreatedWarning after 20 contexts.
+        var credential = string.IsNullOrWhiteSpace(databaseOptions.AccountKey)
+            ? new DefaultAzureCredential()
+            : null;
+
+        if (credential is null)
+        {
+            services.AddDbContext<SubmissionsDbContext>(options => options.UseCosmos(
+                databaseOptions.ConnectionString,
+                databaseOptions.AccountKey,
+                databaseOptions.Name,
+                cosmosOptions => cosmosOptions.ConnectionMode(ConnectionMode.Gateway)));
+        }
+        else
+        {
+            services.AddDbContext<SubmissionsDbContext>(options => options.UseCosmos(
+                databaseOptions.ConnectionString,
+                credential,
+                databaseOptions.Name,
+                cosmosOptions => cosmosOptions.ConnectionMode(ConnectionMode.Gateway)));
+        }
     }
 }

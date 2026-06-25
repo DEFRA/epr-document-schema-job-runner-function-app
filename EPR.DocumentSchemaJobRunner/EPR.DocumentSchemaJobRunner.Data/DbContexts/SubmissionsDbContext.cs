@@ -38,8 +38,12 @@ public class SubmissionsDbContext : DbContext
             entity.ToContainer("JobOutputs");
             entity.HasPartitionKey(x => x.Id);
             entity.Property(x => x.Id).ToJsonProperty("JobOutputId");
-            entity.HasDiscriminator(x => x.JobType).HasValue<ComplianceSchemeIdJobOutput>(JobType.ComplianceSchemeId);
             entity.Property(x => x.JobType).HasConversion<string>();
+            entity.HasDiscriminator(x => x.JobType)
+                .HasValue<ComplianceSchemeIdJobOutput>(JobType.ComplianceSchemeId);
         });
+
+        modelBuilder.Entity<ComplianceSchemeIdJobOutput>()
+            .HasBaseType<AbstractJobOutput>();
     }
 }

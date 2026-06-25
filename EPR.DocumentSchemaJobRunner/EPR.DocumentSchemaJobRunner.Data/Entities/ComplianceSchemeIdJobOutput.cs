@@ -5,7 +5,10 @@ using Models;
 
 public class ComplianceSchemeIdJobOutput : AbstractJobOutput
 {
-    public List<ComplianceSchemeIdJobResult> Results { get; set; } = new();
+    public ComplianceSchemeIdJobOutput()
+    {
+        JobType = JobType.ComplianceSchemeId;
+    }
 
-    public override JobType JobType => JobType.ComplianceSchemeId;
+    public List<ComplianceSchemeIdJobResult> Results { get; set; } = new();
 }

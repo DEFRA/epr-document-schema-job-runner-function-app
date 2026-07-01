@@ -41,6 +41,7 @@ public class SubmissionsDbContext : DbContext
             entity.Property(x => x.JobType).HasConversion<string>();
             entity.HasDiscriminator(x => x.JobType)
                 .HasValue<ComplianceSchemeIdJobOutput>(JobType.ComplianceSchemeId);
+            entity.HasDiscriminatorInJsonId();
         });
 
         modelBuilder.Entity<ComplianceSchemeIdJobOutput>()

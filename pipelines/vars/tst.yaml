@@ -1,6 +1,12 @@
 variables:
-  azureSubscription: 'AZD-RWD-TST1'
-  docker.imageName: 'documentschemajobrunner'
-  acr.azureContainerRegistryName: 'tstrwdinfac1401'
-  acr.repositoryName: 'documentschemajobrunnerrepository'
-  serviceName: 'tstrwdwebfa1406'
+- group: ServiceConnections
+- name: azureSubscription
+  value: $(ServiceConnectionTST1)
+- name: docker.imageName
+  value: 'documentschemajobrunner'
+- name: acr.azureContainerRegistryName
+  value: 'tstrwdinfac1401'
+- name: acr.repositoryName
+  value: 'documentschemajobrunnerrepository'
+- name: serviceName
+  value: 'tstrwdwebfa1406'
